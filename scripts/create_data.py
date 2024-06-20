@@ -31,7 +31,7 @@ def run():
             course = Course.objects.first()
             Student.objects.create(name=name, classname=classname, course=course)
 
-    for _ in range(1000):
+    for _ in range(20):
         stu = Student.objects.all().order_by("?")[:1][0]
         r = Reason.objects.all().order_by("?")[:1][0]
         log = Log(student=stu, reason=r)

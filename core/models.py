@@ -1,6 +1,7 @@
 import datetime
 
 from django.db import models
+from pypinyin import lazy_pinyin
 
 
 def current_year():
@@ -67,7 +68,13 @@ class Classname(models.Model):
 
 
 class Student(models.Model):
-    name = models.CharField(max_length=10, db_index=True, verbose_name="姓名")
+    name = models.CharField(max_length=20, db_index=True, verbose_name="姓名")
+    pinyin = models.CharField(max_length=20, default="", verbose_name="拼音")
+    pinyin_shortcut = models.CharField(
+        max_length=5,
+        default="",
+        verbose_name="拼音缩写",
+    )
     classname = models.ForeignKey(
         Classname,
         on_delete=models.CASCADE,
@@ -83,6 +90,12 @@ class Student(models.Model):
 
     def __str__(self) -> str:
         return f"{self.classname} {self.name}"
+
+    def save(self, *args, **kwargs):
+        pinyin_list = lazy_pinyin(self.name)
+        self.pinyin = "".join(pinyin_list)
+        self.pinyin_shortcut = "".join(w[0] for w in pinyin_list)
+        super().save(*args, **kwargs)
 
 
 class Reason(models.Model):

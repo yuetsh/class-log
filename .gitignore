@@ -1,6 +1,6 @@
 venv
 .env
-*.splite3
+*.sqlite3
 **/__pycache__
 static/admin
 static/django_extensions

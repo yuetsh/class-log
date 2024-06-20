@@ -5,3 +5,4 @@ psycopg==3.1.19
 psycopg-binary==3.1.19
 gunicorn==22.0.0
 uvicorn==0.30.1
+pypinyin==0.51.0

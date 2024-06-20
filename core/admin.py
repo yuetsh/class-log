@@ -10,8 +10,9 @@ admin.site.site_title = "徐越的课堂记录管理"
 
 
 class StudentAdmin(admin.ModelAdmin):
+    exclude = ["pinyin", "pinyin_shortcut"]
     list_display = ["name", "classname"]
-    search_fields = ["name", "classname__name"]
+    search_fields = ["name", "classname__name", "pinyin", "pinyin_shortcut"]
     list_filter = ["classname__name", "course"]
     list_per_page = 20
     paginator = Paginator
@@ -20,11 +21,23 @@ class StudentAdmin(admin.ModelAdmin):
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Reason)
 admin.site.register(Course)
-admin.site.register(Classname, list_display=["name", "head_teacher"])
+
+
+class ClassnameAdmin(admin.ModelAdmin):
+    exclude = ["pinyin", "pinyin_shortcut"]
+    list_display = ["name", "head_teacher"]
+
+
+admin.site.register(Classname, ClassnameAdmin)
 
 
 class LogAdmin(admin.ModelAdmin):
-    search_fields = ["student__name", "student__classname__name"]
+    search_fields = [
+        "student__name",
+        "student__classname__name",
+        "student__pinyin",
+        "student__pinyin_shortcut",
+    ]
     list_filter = ["student__classname__name"]
     list_per_page = 20
     paginator = Paginator
