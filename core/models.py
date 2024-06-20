@@ -13,8 +13,8 @@ def year_choices():
 
 
 class Semester(models.TextChoices):
-    FALL = "FA", "Fall"
-    SPRING = "SP", "Spring"
+    FALL = "FA", "秋季"
+    SPRING = "SP", "春季"
 
 
 class ClassCategory(models.TextChoices):
