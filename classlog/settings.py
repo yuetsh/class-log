@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["log.xuyue.cc"]
+ALLOWED_HOSTS = ["log.xuyue.cc", "localhost"]
 
 CSRF_TRUSTED_ORIGINS = ["https://log.xuyue.cc", "http://localhost:8088"]
 
