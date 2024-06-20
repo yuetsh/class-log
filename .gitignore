@@ -1,0 +1,4 @@
+venv
+.env
+*.splite3
+**/__pycache__
