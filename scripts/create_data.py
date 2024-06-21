@@ -4,11 +4,11 @@ from core.models import Classname, Course, Log, Reason, Student
 
 
 def run():
-#    User.objects.create_superuser(
-#        email="test@example.com",
-#        username="test",
-#        password="123456",
-#    )
+    User.objects.create_superuser(
+        email="test@example.com",
+        username="test",
+        password="123456",
+    )
 
     Reason.objects.create(name="积极回答问题")
     Reason.objects.create(name="认真完成作业")
@@ -31,7 +31,7 @@ def run():
             course = Course.objects.first()
             Student.objects.create(name=name, classname=classname, course=course)
 
-    for _ in range(20):
+    for _ in range(22):
         stu = Student.objects.all().order_by("?")[:1][0]
         r = Reason.objects.all().order_by("?")[:1][0]
         log = Log(student=stu, reason=r)
