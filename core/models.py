@@ -1,5 +1,6 @@
 import datetime
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from pypinyin import lazy_pinyin
 
@@ -42,10 +43,10 @@ class Course(models.Model):
     class Meta:
         verbose_name_plural = "课程"
         verbose_name = "课程"
-        ordering = ["year", "semester"]
+        ordering = ["-year"]
 
     def __str__(self):
-        return f"{self.year} {self.name} {self.semester}"
+        return f"{self.year} {self.get_semester_display()} {self.name}"
 
 
 class Classname(models.Model):
@@ -106,15 +107,16 @@ class Reason(models.Model):
     class Meta:
         verbose_name_plural = "原因"
         verbose_name = "原因"
+        ordering = ["-is_add", "-score"]
 
     def __str__(self):
-        return f"{self.name}{"加" if self.is_add else "减"}{self.score}分"
+        return f"{self.name} {"加" if self.is_add else "减"}{self.score}分"
 
 
 class Log(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, verbose_name="学生")
     reason = models.ForeignKey(Reason, on_delete=models.CASCADE, verbose_name="原因")
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="记录时间")
 
     class Meta:
         verbose_name_plural = "记录"
@@ -123,3 +125,8 @@ class Log(models.Model):
 
     def __str__(self):
         return f"{self.student.classname} {self.student.name} {self.reason.name}"
+
+    def save(self, *args, **kwargs):
+        if not self.student.is_active:
+            raise ValidationError("该学生没有激活")
+        super().save(*args, **kwargs)

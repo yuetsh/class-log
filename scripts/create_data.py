@@ -4,11 +4,11 @@ from core.models import Classname, Course, Log, Reason, Student
 
 
 def run():
-    User.objects.create_superuser(
-        email="test@example.com",
-        username="test",
-        password="123456",
-    )
+#    User.objects.create_superuser(
+#        email="test@example.com",
+#        username="test",
+#        password="123456",
+#    )
 
     Reason.objects.create(name="积极回答问题")
     Reason.objects.create(name="认真完成作业")
