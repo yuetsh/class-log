@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["log.xuyue.cc", "localhost"]
+ALLOWED_HOSTS = ["log.xuyue.cc", "localhost", "127.0.0.1"]
 
 CSRF_TRUSTED_ORIGINS = ["https://log.xuyue.cc", "http://localhost:8088"]
 
@@ -86,7 +86,7 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.db.DatabaseCache",
-        "LOCATION": "core_cache_table",
+        "LOCATION": "core_cache",
     }
 }
 

@@ -126,7 +126,6 @@ class Log(models.Model):
     def __str__(self):
         return f"{self.student.classname} {self.student.name} {self.reason.name}"
 
-    def save(self, *args, **kwargs):
+    def clean(self):
         if not self.student.is_active:
             raise ValidationError("该学生没有激活")
-        super().save(*args, **kwargs)
