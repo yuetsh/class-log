@@ -111,7 +111,7 @@ class Reason(models.Model):
         ordering = ["-is_add", "-score"]
 
     def __str__(self):
-        return f"{self.name} {"加" if self.is_add else "减"}{self.score}分"
+        return f"{self.name} {'加' if self.is_add else '减'}{self.score}分"
 
 
 class Log(models.Model):
