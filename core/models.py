@@ -70,11 +70,12 @@ class Classname(models.Model):
 
 class Student(models.Model):
     name = models.CharField(max_length=20, db_index=True, verbose_name="姓名")
-    pinyin = models.CharField(max_length=20, default="", verbose_name="拼音")
+    pinyin = models.CharField(max_length=20, default="", blank=True, verbose_name="拼音")
     pinyin_shortcut = models.CharField(
         max_length=5,
         default="",
         verbose_name="拼音缩写",
+        blank=True,
     )
     classname = models.ForeignKey(
         Classname,
