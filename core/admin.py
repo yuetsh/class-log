@@ -10,6 +10,7 @@ admin.site.site_title = "徐越的课堂记录管理"
 
 
 class StudentAdmin(admin.ModelAdmin):
+    exclude = ["pinyin", "pinyin_shortcut"]
     list_display = ["name", "classname", "course"]
     search_fields = ["name", "classname__name", "pinyin", "pinyin_shortcut"]
     list_filter = ["classname__name"]
