@@ -9,6 +9,7 @@ services:
       - 8088:80
     depends_on:
       - classlog-web
+    restart: unless-stopped
 
   classlog-web:
     build: .
@@ -22,6 +23,7 @@ services:
       - POSTGRES_PASSWORD
       - POSTGRES_HOST
       - SECRET_KEY
+    restart: unless-stopped
     # volumes:
     #   - .:/app
 
@@ -35,6 +37,7 @@ services:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
       - POSTGRES_HOST
+    restart: unless-stopped
 
 volumes:
   pg_data:
